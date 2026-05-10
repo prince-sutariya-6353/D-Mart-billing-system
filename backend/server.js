@@ -47,6 +47,15 @@ app.use('/api/payment', require('./routes/paymentRoutes'));
 app.use('/api/ai', require('./routes/aiRoutes'));
 app.use('/api/suppliers', require('./routes/supplierRoutes'));
 
+// Root route for health check and landing
+app.get('/', (req, res) => {
+  res.json({ 
+    success: true, 
+    message: 'D-Mart Smart Billing API is live!',
+    version: '1.0.0'
+  });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'D-Mart Smart Billing API is running', timestamp: new Date() });
@@ -57,10 +66,14 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`\n🛒 D-Mart Smart Billing Server running on port ${PORT}`);
-  console.log(`📦 Environment: ${process.env.NODE_ENV}`);
-  console.log(`🔗 API Base: http://localhost:${PORT}/api\n`);
-});
+
+// Only start the server if we're not running as a Vercel function
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`\n🛒 D-Mart Smart Billing Server running on port ${PORT}`);
+    console.log(`📦 Environment: ${process.env.NODE_ENV}`);
+    console.log(`🔗 API Base: http://localhost:${PORT}/api\n`);
+  });
+}
 
 module.exports = app;
