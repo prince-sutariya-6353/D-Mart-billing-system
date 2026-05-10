@@ -174,15 +174,26 @@ Open: **http://localhost:5173**
 
 ---
 
-## 🏗️ Production Deployment
+## 🏗️ Production Deployment (Vercel)
 
-```bash
-# Build frontend
-cd frontend
-npm run build
+### 1. Backend (Render or Vercel)
+- **Root Directory**: `backend`
+- **Build Command**: `npm install`
+- **Start Command**: `node server.js`
+- **Environment Variables**:
+  - `MONGO_URI`: Your MongoDB connection string
+  - `JWT_SECRET`: Your JWT secret
+  - `ALLOWED_ORIGINS`: `https://your-frontend-domain.vercel.app`
+  - `NODE_ENV`: `production`
 
-# Start backend in production
-cd backend
-NODE_ENV=production npm start
-```
+### 2. Frontend (Vercel)
+- **Root Directory**: `frontend`
+- **Framework Preset**: `Vite`
+- **Environment Variables**:
+  - `VITE_API_URL`: `https://your-backend-domain.vercel.app/api`
+
+### 3. Vercel Configuration
+The project includes `vercel.json` files in both directories to handle:
+- **Backend**: Express routing on Vercel.
+- **Frontend**: Single Page Application (SPA) routing.
 
