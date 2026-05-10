@@ -5,12 +5,7 @@ import toast from 'react-hot-toast'
 import { useAuth } from '../../context/AuthContext'
 import { getRoleHomePath } from '../../utils/roleUtils'
 
-const demoAccounts = [
-  { role: 'admin', label: 'Admin', email: 'admin@dmart.com', password: 'admin123' },
-  { role: 'cashier', label: 'Cashier', email: 'cashier@dmart.com', password: 'cashier123' },
-  { role: 'staff', label: 'Staff', email: 'staff@dmart.com', password: 'staff123' },
-  { role: 'customer', label: 'Customer', email: 'customer@dmart.com', password: 'customer123' },
-]
+
 
 export default function LoginPage() {
   const { login } = useAuth()
@@ -40,9 +35,7 @@ export default function LoginPage() {
     }
   }
 
-  const useDemoAccount = (email, password) => {
-    setForm({ email, password })
-  }
+
 
   return (
     <div className="mx-auto w-full max-w-xl rounded-[36px] border border-white/10 bg-slate-950/80 p-5 shadow-2xl shadow-black/40 backdrop-blur-xl sm:p-8">
@@ -107,26 +100,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="mt-8 border-t border-white/10 pt-6">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <p className="text-sm font-semibold text-white">Quick demo access</p>
-              <p className="text-xs text-slate-400">Load sample credentials for each role.</p>
-            </div>
-          </div>
-          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {demoAccounts.map(({ role, label, email, password }) => (
-              <button
-                key={role}
-                type="button"
-                onClick={() => useDemoAccount(email, password)}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-3 text-sm font-medium text-slate-100 transition hover:border-emerald-300/25 hover:bg-emerald-400/10 hover:text-white"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
+
       </div>
     </div>
   )
