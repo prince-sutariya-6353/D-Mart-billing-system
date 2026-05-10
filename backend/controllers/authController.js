@@ -4,7 +4,10 @@ const User = require('../models/User');
 
 // Generate JWT token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is missing from environment variables');
+  }
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE || '30d' });
 };
 
 // @desc    Login user

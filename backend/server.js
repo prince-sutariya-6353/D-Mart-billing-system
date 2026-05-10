@@ -8,6 +8,14 @@ const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 // Load env vars
 dotenv.config();
 
+// Critical check for environment variables
+if (!process.env.MONGO_URI) {
+  console.error('❌ FATAL ERROR: MONGO_URI is not defined in environment variables.');
+}
+if (!process.env.JWT_SECRET) {
+  console.error('❌ FATAL ERROR: JWT_SECRET is not defined in environment variables.');
+}
+
 const app = express();
 
 // Fix favicon 500 error on some hosts
