@@ -8,10 +8,13 @@ const { errorHandler, notFound } = require('./middleware/errorMiddleware');
 // Load env vars
 dotenv.config();
 
+const app = express();
+
+// Fix favicon 500 error on some hosts
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // Connect to MongoDB
 connectDB();
-
-const app = express();
 
 // Middleware
 const allowedOrigins = process.env.ALLOWED_ORIGINS 
